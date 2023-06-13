@@ -4,7 +4,7 @@
 EAPI=7
 
 DB_VER="4.8"
-inherit autotools db-use flag-o-matic xdg-utils
+inherit autotools db-use desktop flag-o-matic xdg-utils
 
 DESCRIPTION="Particl Coin core bundle."
 HOMEPAGE="https://particl.io/"

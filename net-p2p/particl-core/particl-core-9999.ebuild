@@ -6,7 +6,7 @@ EAPI=7
 DB_VER="4.8"
 inherit autotools db-use flag-o-matic xdg-utils
 
-DESCRIPTION="Particl, P2P privacy ecosystem."
+DESCRIPTION="Particl Coin core bundle."
 HOMEPAGE="https://particl.io/"
 
 if [[ ${PV} = *9999* ]]; then
@@ -20,7 +20,7 @@ fi
 LICENSE="MIT"
 SLOT="0"
 
-IUSE="+asm +qrcode +dbus +wallet +hardened +gui +daemon +utils bench test upnp zeromq"
+IUSE="+asm +qrcode +dbus +wallet +hardened +gui +daemon +utils bench test upnp zeromq man"
 REQUIRED_USE="
 	wallet? (
 		|| ( gui daemon )
@@ -77,6 +77,10 @@ RESTRICT="!test? ( test )"
 S="${WORKDIR}/${P}"
 
 src_prepare() {
+	if use gui; then
+		cp src/qt/res/icons/particl.png particl-qt.png
+	fi
+
 	default
 	eautoreconf
 }
@@ -91,6 +95,7 @@ src_configure() {
 		$(use_enable upnp upnp-default)
 		$(use_enable test tests)
 		$(use_enable test gui-tests)
+		$(use_with test rapidcheck)
 		$(use_enable wallet wallet)
 		$(use_with wallet sqlite)
 		$(use_enable zeromq zmq)
@@ -102,6 +107,7 @@ src_configure() {
 		$(use_enable utils util-tx)
 		$(use_enable utils util-wallet)
 		$(use_enable bench bench)
+		$(use_enable man man)
 		--disable-multiprocess
 		--without-multiprocess
 		--without-libs
@@ -112,6 +118,13 @@ src_configure() {
 
 src_install() {
 	default
+
+	if use gui; then
+		insinto /usr/share/icons/hicolor/scalable/apps
+		doins particl-qt.png
+		cp "${FILESDIR}/particl-qt.desktop" "${T}"
+		domenu "${T}/particl-qt.desktop"
+	fi
 }
 
 update_caches() {
@@ -122,6 +135,23 @@ update_caches() {
 pkg_postinst() {
 	if use gui; then
 		update_caches
+	fi
+
+	elog "To get ${PN} running on Musl-based systems,"
+	elog "make sure to set LC_ALL=\"C\" environment variable."
+
+	if use gui; then
+		elog "particl-qt to launch GUI."
+	fi
+
+	if use daemon; then
+		elog "particld to launch daemon."
+	fi
+
+	if use utils; then
+		elog "particl-cli to launch CLI."
+		elog "particl-tx to launch transaction utility."
+		elog "particl-wallet to launch wallet utility."
 	fi
 }
 

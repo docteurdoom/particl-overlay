@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Particl Qt
+Comment=Particl, P2P privacy ecosystem.
+Exec=particl-qt %u
+Terminal=false
+Type=Application
+Icon=/usr/share/icons/hicolor/scalable/apps/particl-qt.png
+Categories=Finance;P2P;Network;Qt;
+StartupWMClass=particl-qt

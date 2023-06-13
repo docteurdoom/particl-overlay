@@ -77,6 +77,10 @@ RESTRICT="!test? ( test )"
 S="${WORKDIR}/${P}"
 
 src_prepare() {
+	if use gui; then
+		cp src/qt/res/icons/particl.png particl-qt.png
+	fi
+
 	default
 	eautoreconf
 }
@@ -114,6 +118,13 @@ src_configure() {
 
 src_install() {
 	default
+
+	if use gui; then
+		insinto /usr/share/icons/hicolor/scalable/apps
+		doins particl-qt.png
+		cp "${FILESDIR}/particl-qt.desktop" "${T}"
+		domenu "${T}/particl-qt.desktop"
+	fi
 }
 
 update_caches() {
@@ -124,6 +135,23 @@ update_caches() {
 pkg_postinst() {
 	if use gui; then
 		update_caches
+	fi
+
+	elog "To get ${PN} running on Musl-based systems,"
+	elog "make sure to set LC_ALL=\"C\" environment variable."
+
+	if use gui; then
+		elog "particl-qt to launch GUI."
+	fi
+
+	if use daemon; then
+		elog "particld to launch daemon."
+	fi
+
+	if use utils; then
+		elog "particl-cli to launch CLI."
+		elog "particl-tx to launch transaction utility."
+		elog "particl-wallet to launch wallet utility."
 	fi
 }
 

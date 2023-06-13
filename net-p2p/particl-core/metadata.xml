@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>docteurdoom@bitmessage.de</email>
+    <description>Telegram @SexyGhost.</description>
+    <name>Doctor Doom</name>
+  </maintainer>
+  <use>
+    <flag name="asm">Use assembly routines for compiler optimisation.</flag>
+    <flag name="dbus">Enable D-Bus integration.</flag>
+    <flag name="hardened">Make hardened binaries for enhanced security.</flag>
+    <flag name="qrcode">Add support for generating QR-codes.</flag>
+    <flag name="wallet">Add support for wallet. Only GUI console will be built without this flag.</flag>
+    <flag name="gui">Build GUI: particl-qt.</flag>
+    <flag name="daemon">Build daemon: particld.</flag>
+    <flag name="utils">Build utils: particl-cli, particl-tx, particl-wallet.</flag>
+    <flag name="bench">Build executables for benchmarks.</flag>
+    <flag name="test">Build executables for tests.</flag>
+    <flag name="upnp">Enable UPnP for firewall-jumping.</flag>
+    <flag name="zeromq">Allows generating ZMQ notifications.</flag>
+    <flag name="man">Install manuals.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">particl/particl-core</remote-id>
+    <bugs-to>https://github.com/particl/particl-core/issues</bugs-to>
+  </upstream>
+</pkgmetadata>

@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Version=1.0
 Name=Particl Qt
-Comment=Particl, P2P privacy ecosystem.
+Comment=Particl Coin core bundle.
 Exec=particl-qt %u
 Terminal=false
 Type=Application

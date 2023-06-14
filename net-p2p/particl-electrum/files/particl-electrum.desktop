@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Particl Electrum
+Comment=Lightweight Electrum wallet for Particl Coin.
+Exec=particl-electrum %u
+Terminal=false
+Type=Application
+Icon=/usr/share/icons/hicolor/scalable/apps/particl-electrum.png
+Categories=Finance;P2P;Network;
+StartupWMClass=particl-electrum

@@ -67,7 +67,7 @@ src_install() {
 	dosym ../../usr/bin/electrum usr/bin/${PN}
 
 	rm -rf electrum.desktop
-	cp "${FILESDIR}/${PN}.desktop" "${S}/electrum.desktop"
+	domenu "${FILESDIR}/${PN}.desktop"
 	cp electrum/gui/icons/electrum.png ${PN}.png
 
 	insinto /usr/share/icons/hicolor/scalable/apps

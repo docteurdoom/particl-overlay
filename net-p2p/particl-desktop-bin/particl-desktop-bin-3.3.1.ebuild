@@ -30,6 +30,11 @@ src_prepare() {
 	# Renaming is done due to whitespaces breaking icon caching.
 	mv "opt/Particl Desktop/" "opt/${PN}"
 
+	# Fix desktop entry.
+	ENTRY="usr/share/applications/${MY_PN}.desktop"
+	sed -i "s/Exec=.*//" ${ENTRY}
+	echo "Exec=${PN} %u" >> ${ENTRY}
+
 	# Files in local usr/lib are only used in Fedora and causing warnings if not deleted.
 	rm -rf "usr/lib"
 }
